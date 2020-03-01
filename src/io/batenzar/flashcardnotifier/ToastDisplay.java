@@ -9,15 +9,22 @@ import java.awt.TrayIcon.MessageType;
 
 public class ToastDisplay {
 
-	public static void displayTray(String title, String message) throws AWTException {
+	private static TrayIcon trayIcon;
+	static {
 		Image image = Toolkit.getDefaultToolkit().createImage("icon.png");
-		TrayIcon trayIcon = new TrayIcon(image, "Tray Demo");
+		trayIcon = new TrayIcon(image, "Tray Demo");
 		trayIcon.setImageAutoSize(true);
 		trayIcon.setToolTip("System tray icon tooltip");
 
 		SystemTray tray = SystemTray.getSystemTray();
+		try {
 			tray.add(trayIcon);
-		
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void displayTray(String title, String message) throws AWTException {
 		trayIcon.displayMessage(title, message, MessageType.INFO);
 	}
 }
