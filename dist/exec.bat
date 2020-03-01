@@ -1,0 +1,1 @@
+java -cp "./*" io.batenzar.flashcardnotifier.Main data.txt
